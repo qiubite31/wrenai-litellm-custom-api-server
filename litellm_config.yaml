@@ -1,0 +1,9 @@
+model_list:
+  - model_name: "my-custom-model"
+    litellm_params:
+      model: "my-custom-llm/my-custom-model"
+
+litellm_settings:
+  custom_provider_map:
+    - {"provider": "my-custom-llm", "custom_handler": "custom_handler.my_custom_llm"}
+  debug: true  # Enable debug logs (optional) 

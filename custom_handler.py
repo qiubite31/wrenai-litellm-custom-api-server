@@ -17,6 +17,10 @@ class MyCustomLLM(CustomLLM):
     async def acompletion(self, *args, **kwargs) -> litellm.ModelResponse:
         return self.completion(*args, **kwargs)
 
+    # WARNING: This embedding function is not working properly
+    # Reason: LiteLLM does not officially support custom embedding providers yet
+    # The current implementation returns dummy embeddings and should not be used in production
+    # TODO: Remove or update this function once LiteLLM officially supports custom embedding providers
     def embedding(self, model: str, input: List[str], **kwargs) -> EmbeddingResponse:
         print(f"Embedding called with model={model}, input={input}")  # Debug
         dummy_embedding = [0.1, 0.2, 0.3]
@@ -28,6 +32,10 @@ class MyCustomLLM(CustomLLM):
             usage={"prompt_tokens": len(input), "total_tokens": len(input)}
         )
     
+    # WARNING: This async embedding function is not working properly
+    # Reason: LiteLLM does not officially support custom embedding providers yet
+    # The current implementation returns dummy embeddings and should not be used in production
+    # TODO: Remove or update this function once LiteLLM officially supports custom embedding providers
     async def aembedding(self, *args, **kwargs) -> litellm.EmbeddingResponse:
         return self.embedding(*args, **kwargs)
 
